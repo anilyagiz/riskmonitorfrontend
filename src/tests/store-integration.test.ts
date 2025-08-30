@@ -339,7 +339,7 @@ describe('Store Integration with Credibility Tiers', () => {
     it('should handle invalid tier values', async () => {
       const invalidAgent = {
         ...mockAgent,
-        credibilityTier: 'INVALID_TIER' as any
+        credibilityTier: 'INVALID_TIER' as unknown as CredibilityTier
       };
 
       // This should not crash the system

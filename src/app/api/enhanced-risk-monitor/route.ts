@@ -3,6 +3,7 @@ import { enhancedRiskMonitor } from '@/lib/risk-monitor-enhanced';
 import { store } from '@/lib/store';
 import { ensureSeeded } from '@/lib/seed';
 import { ChainId } from '@/types/credit-vault';
+import { CreditVault } from '@/types/credit-vault';
 
 export async function GET(request: NextRequest) {
   try {
@@ -169,7 +170,7 @@ export async function POST(request: NextRequest) {
         }
 
         const monitoringResult = await enhancedRiskMonitor.monitorVault(
-          vault as any,
+          vault as CreditVault,
           agent,
           historicalData || []
         );

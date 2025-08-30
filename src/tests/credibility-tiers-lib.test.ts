@@ -307,7 +307,7 @@ describe('Credibility Tiers Library', () => {
       };
 
       // This should throw an error since calculateCredibilityTier expects a score
-      expect(() => calculateCredibilityTier(agent.score as any)).toThrow();
+      expect(() => calculateCredibilityTier(agent.score as unknown as Score)).toThrow();
     });
 
     it('should handle very high scores', () => {

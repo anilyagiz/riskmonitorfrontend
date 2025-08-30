@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
 
-export interface WebSocketMessage {
+export interface WebSocketMessage<T = unknown> {
   type: string;
-  data: any;
+  data: T;
   timestamp: number;
   id?: string;
 }
@@ -12,7 +12,7 @@ export interface WebSocketConfig {
   reconnectInterval?: number;
   maxReconnectAttempts?: number;
   heartbeatInterval?: number;
-  onMessage?: (message: WebSocketMessage) => void;
+  onMessage?: <T>(message: WebSocketMessage<T>) => void;
   onConnect?: () => void;
   onDisconnect?: () => void;
   onError?: (error: Event) => void;

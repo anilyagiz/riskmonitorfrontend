@@ -70,7 +70,7 @@ global.fetch = vi.fn();
 describe('Dashboard Components', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    (global.fetch as any).mockResolvedValue({
+    (global.fetch as unknown as jest.Mock).mockResolvedValue({
       ok: true,
       json: async () => ({ success: true })
     });

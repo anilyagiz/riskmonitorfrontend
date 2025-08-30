@@ -2,6 +2,11 @@ import { Agent, AgentScore, CredibilityTier, VerificationType, VerificationStatu
 import { LTVCalculation, LTVAdjustment, RiskMetrics, Collateral } from '@/types/credit';
 import { ReputationEvent, ReputationSummary, ReputationSummaryBreakdown } from '@/types/reputation';
 
+interface HistoricalDatum {
+  performance: number;
+  timestamp: Date;
+}
+
 // Enhanced scoring weights
 const SCORING_WEIGHTS = {
   PROVENANCE: 0.35,
@@ -187,7 +192,7 @@ function calculateSourceCodeQualityScore(agent: Agent): number {
   return Math.min(20, score);
 }
 
-export function calculatePerformanceScore(agent: Agent, historicalData?: any[]): number {
+export function calculatePerformanceScore(agent: Agent, historicalData?: HistoricalDatum[]): number {
   let score = 0;
   let maxScore = 0;
 
@@ -209,7 +214,7 @@ export function calculatePerformanceScore(agent: Agent, historicalData?: any[]):
   return Math.round((score / maxScore) * 100);
 }
 
-function calculatePerformanceConsistencyScore(agent: Agent, historicalData?: any[]): number {
+function calculatePerformanceConsistencyScore(agent: Agent, historicalData?: HistoricalDatum[]): number {
   if (!historicalData || historicalData.length < 3) {
     // Use agent score as fallback
     return Math.min(40, agent.score.performance);

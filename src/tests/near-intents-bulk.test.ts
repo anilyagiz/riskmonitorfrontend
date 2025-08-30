@@ -39,11 +39,11 @@ describe('NEAR Intents Bulk Operations', () => {
       await bulkManager.initializeAgents(mockWallets);
       
       // Check that agents were initialized
-      expect((bulkManager as any).agents.size).toBe(mockWallets.length);
+      expect((bulkManager as unknown as BulkOperationsManager).agents.size).toBe(mockWallets.length);
       
       // Check that each wallet has an agent
       for (const wallet of mockWallets) {
-        expect((bulkManager as any).agents.has(wallet.accountId)).toBe(true);
+        expect((bulkManager as unknown as BulkOperationsManager).agents.has(wallet.accountId)).toBe(true);
       }
     });
 

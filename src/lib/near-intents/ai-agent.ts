@@ -231,7 +231,7 @@ export class AIAgent {
   /**
    * Gets the account state/balance with comprehensive information
    */
-  async getAccountState(): Promise<any> {
+  async getAccountState(): Promise<Record<string, any>> {
     try {
       if (!this.account) {
         throw new Error('Agent not initialized. Call initialize() first.');
@@ -239,7 +239,7 @@ export class AIAgent {
       
       const [state, balance] = await Promise.all([
         this.account.state(),
-        (this.account as any).getAccountBalance()
+        (this.account as unknown as any).getAccountBalance()
       ]);
       
       return {

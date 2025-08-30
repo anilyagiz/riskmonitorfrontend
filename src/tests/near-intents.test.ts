@@ -1,4 +1,4 @@
-import { NearIntents, ASSET_MAP } from '../lib/near-intents/near-intents';
+import { NearIntents } from '../lib/near-intents/near-intents';
 import { AIAgent } from '../lib/near-intents/ai-agent';
 import { store } from '../lib/store';
 import { Agent, CredibilityTier } from '../types/agent';
@@ -45,19 +45,19 @@ const mockAgent: Agent = {
 
 describe('NEAR Intents Integration', () => {
   let nearIntents: NearIntents;
-  let mockAccount: any;
+  let mockAccount: MockAccount;
 
   beforeEach(() => {
     mockAccount = new MockAccount('test-account.near');
     nearIntents = new NearIntents(
-      mockAccount as any,
+      mockAccount as unknown as Account,
       'https://solver-bus.near.org',
       'intents.verifier.near'
     );
     
     // Add mock agent to store
-    (store as any).agents = new Map();
-    (store as any).agents.set('agent_1', mockAgent);
+    (store as unknown as InMemoryStore).agents = new Map();
+    (store as unknown as InMemoryStore).agents.set('agent_1', mockAgent);
   });
 
   describe('NearIntents', () => {
@@ -155,7 +155,7 @@ describe('NEAR Intents Integration', () => {
         privateKey: 'ed25519:test-key',
       });
       
-      const agentInfo = await (agent as any).getAgentInfo('agent_1');
+      const agentInfo = await (agent as unknown as AIAgent).getAgentInfo('agent_1');
       expect(agentInfo).toBeDefined();
       expect(agentInfo?.id).toBe('agent_1');
     });
